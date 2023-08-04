@@ -36,7 +36,7 @@ public class ShootPistol : MonoBehaviour
         MyInput();
 
         if(ammunitionDisplay != null)
-            ammunitionDisplay.SetText(bulletsLeft + " / " + magazineSize);
+            ammunitionDisplay.SetText("Ammo: " + bulletsLeft + " / " + magazineSize);
     }
 
     private void MyInput()

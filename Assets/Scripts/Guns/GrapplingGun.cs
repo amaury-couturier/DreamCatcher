@@ -6,7 +6,7 @@ public class GrapplingGun : MonoBehaviour
 {
     private LineRenderer lr;
     private Vector3 grapplePoint;
-    public LayerMask whatIsGround;
+    public LayerMask whatIsGrappable;
     public Transform gunTip, mainCamera, player;
     private float maxDistance = 40f;
     private SpringJoint joint;
@@ -36,7 +36,7 @@ public class GrapplingGun : MonoBehaviour
     void StartGrapple()
     {
         RaycastHit hit;
-        if(Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, maxDistance))
+        if(Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, maxDistance, whatIsGrappable))
         {
             grapplePoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();

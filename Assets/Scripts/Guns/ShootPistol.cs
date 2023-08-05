@@ -9,9 +9,8 @@ public class ShootPistol : MonoBehaviour
 
     public float shootForce;
 
-    public float timeBetweenShooting, timeBetweenShots;
+    public float timeBetweenShooting, timeBetweenShots, damageAmount;
     public int magazineSize, bulletsPerTap;
-    public bool buttonHold;
 
     private int bulletsLeft, bulletsShot;
 
@@ -41,10 +40,7 @@ public class ShootPistol : MonoBehaviour
 
     private void MyInput()
     {
-        if(buttonHold)
-            shooting = Input.GetKey(KeyCode.Mouse1);
-        else   
-            shooting = Input.GetKeyDown(KeyCode.Mouse1);
+        shooting = Input.GetKeyDown(KeyCode.Mouse1);
 
         if(readyToShoot && shooting && bulletsLeft > 0)
         {
@@ -65,7 +61,16 @@ public class ShootPistol : MonoBehaviour
 
         Vector3 targetPoint;
         if(Physics.Raycast(ray, out hit))
+        {
+            EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damageAmount);
+                bulletsLeft++;
+            }
+
             targetPoint = hit.point;
+        }
         else   
             targetPoint = ray.GetPoint(100);
 
@@ -85,7 +90,7 @@ public class ShootPistol : MonoBehaviour
             allowInvoke = false;
         }
 
-        Destroy(currentBullet, 2.0f);
+        Destroy(currentBullet, 1.5f);
     }
 
     private void ResetShot() 

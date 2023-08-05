@@ -84,6 +84,8 @@ public class ShootPistol : MonoBehaviour
             Invoke("ResetShot", timeBetweenShooting);
             allowInvoke = false;
         }
+
+        Destroy(currentBullet, 2.0f);
     }
 
     private void ResetShot() 
@@ -91,4 +93,5 @@ public class ShootPistol : MonoBehaviour
         readyToShoot = true;
         allowInvoke = true;
     }
+
 }

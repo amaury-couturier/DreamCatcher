@@ -9,7 +9,7 @@ public class Finish : MonoBehaviour
     {
         if(other.gameObject.name == "PlayerObject")
         {
-            SceneManager.LoadScene("Win Screen");
+            LevelManager.manager.FinishedGame();
         }
     }
 }

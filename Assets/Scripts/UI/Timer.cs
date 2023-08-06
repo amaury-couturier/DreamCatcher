@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -17,9 +18,9 @@ public class Timer : MonoBehaviour
     public float timerLimit;
 
     [Header("Format Settings")]
-    public bool haasFormat;
+    public bool hasFormat;
     public TimerFormats format;
-    private Dictionary<TimerFormats, string> timeFormats = new Dictionary<TimerFormats, string>();
+    public Dictionary<TimerFormats, string> timeFormats = new Dictionary<TimerFormats, string>();
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if countDOwn is true, currentTime will count down and if countDown is false, currentTime will count up
+        //if countDown is true, currentTime will count down and if countDown is false, currentTime will count up
         currentTime = countDown ? currentTime -= Time.deltaTime : currentTime+= Time.deltaTime;
 
         if(hasLimit && ((countDown && currentTime <= timerLimit) || (!countDown && currentTime >= timerLimit)))
@@ -41,6 +42,9 @@ public class Timer : MonoBehaviour
             SetTimerText();
             timerText.color = Color.red;
             enabled = false;
+            SceneManager.LoadScene("Game Over");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         SetTimerText();
@@ -48,7 +52,7 @@ public class Timer : MonoBehaviour
 
     private void SetTimerText()
     {
-        timerText.text = haasFormat ? currentTime.ToString(timeFormats[format]) : currentTime.ToString();
+        timerText.text = hasFormat ? currentTime.ToString(timeFormats[format]) : currentTime.ToString();
     }
 }
 

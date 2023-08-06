@@ -9,10 +9,11 @@ public class ShootPistol : MonoBehaviour
 
     public float shootForce;
 
-    public float timeBetweenShooting, timeBetweenShots, damageAmount;
+    public float timeBetweenShooting, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
 
-    private int bulletsLeft, bulletsShot;
+    private int bulletsShot, bulletsLeft;
+    public int enemiesLeft = 7;
 
     private bool shooting, readyToShoot;
 
@@ -20,7 +21,7 @@ public class ShootPistol : MonoBehaviour
     public Transform pistolTip;
 
     public GameObject muzzleFlash;
-    public TextMeshProUGUI ammunitionDisplay;
+    public TextMeshProUGUI ammunitionDisplay, enemiesDisplay;
 
     public bool allowInvoke = true;
 
@@ -36,6 +37,8 @@ public class ShootPistol : MonoBehaviour
 
         if(ammunitionDisplay != null)
             ammunitionDisplay.SetText("Ammo: " + bulletsLeft + " / " + magazineSize);
+        if(enemiesDisplay != null)
+            enemiesDisplay.SetText("Nightmares remaining: " + enemiesLeft);
     }
 
     private void MyInput()
@@ -62,13 +65,6 @@ public class ShootPistol : MonoBehaviour
         Vector3 targetPoint;
         if(Physics.Raycast(ray, out hit))
         {
-            EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(damageAmount);
-                bulletsLeft++;
-            }
-
             targetPoint = hit.point;
         }
         else   
@@ -90,7 +86,7 @@ public class ShootPistol : MonoBehaviour
             allowInvoke = false;
         }
 
-        Destroy(currentBullet, 1.5f);
+        Destroy(currentBullet, 0.5f);
     }
 
     private void ResetShot() 
@@ -99,4 +95,13 @@ public class ShootPistol : MonoBehaviour
         allowInvoke = true;
     }
 
+    public void IncrementBulletsLeft()
+    {
+        bulletsLeft++;
+    }
+
+    public void EnemiesLeft()
+    {
+        enemiesLeft--;
+    }
 }

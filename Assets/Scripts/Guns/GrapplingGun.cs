@@ -8,7 +8,7 @@ public class GrapplingGun : MonoBehaviour
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappable;
     public Transform gunTip, mainCamera, player;
-    private float maxDistance = 40f;
+    private float maxDistance = 40f, maxGrappleTime = 3.3f, currentGrappleTime = 0f;
     private SpringJoint joint;
 
     void Awake()
@@ -18,7 +18,16 @@ public class GrapplingGun : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(IsGrappling())
+        {
+            currentGrappleTime += Time.deltaTime;
+
+            if(currentGrappleTime >= maxGrappleTime)
+            {
+                EndGrapple();
+            }
+        }
+        if(Input.GetMouseButtonDown(0) && !IsGrappling())
         {
             StartGrapple();
         }
@@ -35,6 +44,7 @@ public class GrapplingGun : MonoBehaviour
 
     void StartGrapple()
     {
+        currentGrappleTime = 0f;
         RaycastHit hit;
         if(Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, maxDistance, whatIsGrappable))
         {

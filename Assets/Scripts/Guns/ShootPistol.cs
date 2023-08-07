@@ -25,6 +25,8 @@ public class ShootPistol : MonoBehaviour
 
     public bool allowInvoke = true;
 
+    [SerializeField] private AudioSource rayGunSound;
+
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -58,6 +60,7 @@ public class ShootPistol : MonoBehaviour
         readyToShoot = false;
         bulletsLeft--;
         bulletsShot++;
+        
 
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
@@ -68,7 +71,9 @@ public class ShootPistol : MonoBehaviour
             targetPoint = hit.point;
         }
         else   
+        {
             targetPoint = ray.GetPoint(100);
+        }
 
         Vector3 directionWithoutSpread = targetPoint - pistolTip.position;
 
@@ -78,7 +83,10 @@ public class ShootPistol : MonoBehaviour
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
 
         if(muzzleFlash != null)
+        {
             Instantiate(muzzleFlash, pistolTip.position, Quaternion.identity);
+            rayGunSound.Play();
+        }
 
         if(allowInvoke)
         {

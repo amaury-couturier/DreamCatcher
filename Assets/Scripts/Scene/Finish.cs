@@ -22,7 +22,7 @@ public class Finish : MonoBehaviour
             
             if (shootPistol != null)
             {
-                if (shootPistol.enemiesLeft == 0)
+                if (shootPistol.enemiesLeft <= 0)
                     LevelManager.manager.FinishedGame();
                 else
                     SceneManager.LoadScene("Game Over");

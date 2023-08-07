@@ -8,8 +8,9 @@ public class GrapplingGun : MonoBehaviour
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappable;
     public Transform gunTip, mainCamera, player;
-    private float maxDistance = 40f, maxGrappleTime = 3.3f, currentGrappleTime = 0f;
+    private float maxDistance = 40f, maxGrappleTime = 3.5f, currentGrappleTime = 0f;
     private SpringJoint joint;
+    [SerializeField] private AudioSource grappleSound;
 
     void Awake()
     {
@@ -48,6 +49,7 @@ public class GrapplingGun : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, maxDistance, whatIsGrappable))
         {
+            grappleSound.Play();
             grapplePoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;

@@ -1,5 +1,10 @@
 # DreamCatcher
- My 3D game for Adv. Game Design and Development
+My 3D game for Adv. Game Design and Development
+
+All controls are shown in the "Options" button of the main menu. What I forgot to include is that by pressing Shift or Left Control when wall running, you are able to move up or down on the wall. 
+Itch.io link for an easy way to play the game: https://yruamma.itch.io/dream-catcher
+
+The music and 3D Models were made by myself. The programming was also done by myself but, for the most part, I followed tutorials so I don't want to take credit. The sound effects are from Pixabay.
 
 Credit to all of these YouTube Channels for helping me complete the project:
 
@@ -13,6 +18,7 @@ Programming:
 -Coding in Flow
 -Code Monkey
 -The Game Guy
+-Code Cyber
 
 3D modeling (Blender):
 -KingKade 3D
@@ -37,9 +43,7 @@ Unity stuff (effects, bugs, etc.):
 -Online Code Coaching
 
 
-The sound effects are from Pixabay.
-
-Licensing: 
+Pixabay Licensing: 
 
 "Content License Summary
 Welcome to Pixabay! Pixabay is a vibrant community of authors, artists and creators sharing royalty-free images, video, audio and other media. We refer to this collectively as "Content". By accessing and using Content, or by contributing Content, you agree to comply with our Content License.

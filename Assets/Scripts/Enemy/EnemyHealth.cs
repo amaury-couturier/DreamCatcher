@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float maxHealth = 1f;
-    private float currentHealth;
+    public float health = 1f;
 
     [SerializeField] private AudioSource deathEffect;
 
-    private void Start()
-    {
-        currentHealth = maxHealth;
-    }
-
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        health -= damage;
         deathEffect.Play();
 
-        if (currentHealth <= 0)
+        if (health <= 0)
         {
             Die();
         }

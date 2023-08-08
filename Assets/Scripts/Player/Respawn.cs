@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
-    
     public float threshold;
+    [SerializeField] private GameObject player;
+    [SerializeField] private List<GameObject> checkPoints;
+    [SerializeField] private Vector3 vectorPoint;
 
     void Update()
     {
         if(transform.position.y < threshold)
-            transform.position = new Vector3(0, 0, 0);
+            transform.position = vectorPoint;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        vectorPoint = player.transform.position;
+        Destroy(other.gameObject);
     }
 }
